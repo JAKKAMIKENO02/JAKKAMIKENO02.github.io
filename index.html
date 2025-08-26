@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จักรพงศ์ เตชทัต - หน้าหลัก</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        /* โค้ด CSS ทั้งหมดจะถูกใส่ไว้ในส่วนนี้ */
+        body {
+            font-family: 'Anuphan', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* ครีม-ขาว */
+            color: #333; /* เทาเข้ม */
+            line-height: 1.6;
+            transition: background-color 0.5s ease;
+        }
+
+        /* Animation: Fade-in effect for the whole page */
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        header {
+            background-color: #1a1a1a; /* ดำ */
+            color: #f5f5f5;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #f5f5f5;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #e0e0e0;
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+            left: 0;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            animation: slideUp 1s ease-out;
+        }
+
+        /* Animation: Slide-up effect for main content */
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .profile-section h1, .profile-section p {
+            text-align: center;
+        }
+
+        /* Animation: Typing effect for text */
+        .animate-text {
+            opacity: 0;
+            animation: fadeInText 1s ease-in-out forwards;
+        }
+
+        .animate-text:nth-child(1) { animation-delay: 0.5s; }
+        .animate-text:nth-child(2) { animation-delay: 1s; }
+        .animate-text:nth-child(3) { animation-delay: 1.5s; }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            color: #888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="fade-in">
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">หน้าหลัก</a></li>
+                <li><a href="about.html">เกี่ยวกับฉัน</a></li>
+                <li><a href="hobbies.html">งานอดิเรก</a></li>
+                <li><a href="school.html">โรงเรียน</a></li>
+                <li><a href="contact.html">ติดต่อ</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content">
+        <section class="profile-section">
+            <h1 class="animate-text">สวัสดีครับ! ผมชื่อ จักรพงศ์ เตชทัต</h1>
+            <p class="animate-text">ชื่อเล่น **ไมค์**</p>
+            <p class="animate-text">ยินดีต้อนรับสู่โปรไฟล์ของผมครับ 😊</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Chakraphong Techathat. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // โค้ด JavaScript ทั้งหมดจะถูกใส่ไว้ในส่วนนี้
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add active class to current nav link
+            const currentPath = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').split('/').pop();
+                if (linkPath === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Animate text elements
+            const animateTexts = document.querySelectorAll('.animate-text');
+            
+            // Using Intersection Observer to trigger animation when in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            animateTexts.forEach(text => {
+                observer.observe(text);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -3,188 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>จักรพงศ์ เตชทัต - หน้าหลัก</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@200..700&display=swap" rel="stylesheet">
+    <title>โปรไฟล์ จักรพงศ์ เตชทัต</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* โค้ด CSS ทั้งหมดจะถูกใส่ไว้ในส่วนนี้ */
+        :root {
+            --dark: #1a1a1a;
+            --gray: #333333;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --cream: #e0e0d1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Anuphan', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5; /* ครีม-ขาว */
-            color: #333; /* เทาเข้ม */
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark);
             line-height: 1.6;
-            transition: background-color 0.5s ease;
+            overflow: hidden;
         }
 
-        /* Animation: Fade-in effect for the whole page */
-        .fade-in {
-            animation: fadeIn 1.5s ease-in-out forwards;
-            opacity: 0;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .container {
+            display: flex;
+            min-height: 100vh;
         }
 
-        header {
-            background-color: #1a1a1a; /* ดำ */
-            color: #f5f5f5;
-            padding: 1rem 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .sidebar {
+            width: 250px;
+            background-color: var(--dark);
+            color: var(--cream);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            z-index: 100;
         }
 
-        .nav-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            border: 3px solid var(--cream);
+            margin-bottom: 1rem;
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            align-items: center;
+            font-size: 3rem;
         }
 
-        .nav-links a {
-            color: #f5f5f5;
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s ease;
+        .profile-pic span {
+            color: var(--cream);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            display: block;
-            margin-top: 5px;
-            right: 0;
-            background: #e0e0e0;
-            transition: width 0.4s ease;
+        .sidebar h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
         }
 
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
+        .sidebar p {
+            font-size: 0.9rem;
+            color: var(--cream);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav-menu {
+            list-style: none;
             width: 100%;
-            left: 0;
         }
 
-        main {
+        .nav-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .nav-menu a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            background-color: var(--gray);
+            color: var(--white);
+        }
+
+        .main-content {
+            margin-left: 250px;
+            flex-grow: 1;
             padding: 2rem;
-            max-width: 800px;
-            margin: 2rem auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            animation: slideUp 1s ease-out;
+            position: relative;
+            perspective: 1000px;
         }
 
-        /* Animation: Slide-up effect for main content */
-        @keyframes slideUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .profile-section h1, .profile-section p {
-            text-align: center;
-        }
-
-        /* Animation: Typing effect for text */
-        .animate-text {
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 2rem;
+            background-color: var(--light-gray);
             opacity: 0;
-            animation: fadeInText 1s ease-in-out forwards;
+            transform: translateX(100%);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            z-index: 1;
+            overflow-y: auto;
         }
 
-        .animate-text:nth-child(1) { animation-delay: 0.5s; }
-        .animate-text:nth-child(2) { animation-delay: 1s; }
-        .animate-text:nth-child(3) { animation-delay: 1.5s; }
-
-        @keyframes fadeInText {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .page.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 2;
         }
 
-        footer {
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
-            color: #888;
+        .page-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        /* Responsive Design */
+        .page h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            border-bottom: 3px solid var(--cream);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .page p, .page ul {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .page ul {
+            padding-left: 2rem;
+            list-style: disc;
+        }
+
+        .page ul li {
+            margin-bottom: 0.5rem;
+        }
+
         @media (max-width: 768px) {
-            .nav-links {
-                flex-direction: column;
-                gap: 0.5rem;
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 1rem;
+            }
+
+            .sidebar h1, .sidebar p, .profile-pic {
+                display: none;
+            }
+
+            .nav-menu {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+            }
+
+            .nav-menu li {
+                margin: 0 0.5rem;
+            }
+
+            .main-content {
+                margin-left: 0;
             }
         }
     </style>
 </head>
-<body class="fade-in">
-    <header>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">หน้าหลัก</a></li>
-                <li><a href="about.html">เกี่ยวกับฉัน</a></li>
-                <li><a href="hobbies.html">งานอดิเรก</a></li>
-                <li><a href="school.html">โรงเรียน</a></li>
-                <li><a href="contact.html">ติดต่อ</a></li>
+<body>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile-pic"><span>M</span></div>
+            <h1>จักรพงศ์ เตชทัต</h1>
+            <p>นักเรียน | นักดนตรี</p>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">หน้าหลัก</a></li>
+                <li><a href="#about">เกี่ยวกับฉัน</a></li>
+                <li><a href="#interests">ความสนใจ</a></li>
+                <li><a href="#education">การศึกษา</a></li>
+                <li><a href="#hobbies">งานอดิเรก</a></li>
             </ul>
-        </nav>
-    </header>
-    <main class="main-content">
-        <section class="profile-section">
-            <h1 class="animate-text">สวัสดีครับ! ผมชื่อ จักรพงศ์ เตชทัต</h1>
-            <p class="animate-text">ชื่อเล่น **ไมค์**</p>
-            <p class="animate-text">ยินดีต้อนรับสู่โปรไฟล์ของผมครับ 😊</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Chakraphong Techathat. All Rights Reserved.</p>
-    </footer>
+        </aside>
+
+        <main class="main-content">
+            <section id="home" class="page active">
+                <div class="page-content">
+                    <h2>สวัสดีครับ!</h2>
+                    <p>ยินดีต้อนรับสู่หน้าโปรไฟล์ของผม ผมชื่อ<strong>ไมค์</strong> หรือ จักรพงศ์ เตชทัต ครับ</p>
+                    <p>ผมเป็นนักเรียนอายุ 17 ปี ที่สนใจในเรื่องราวต่างๆ ทั้งในด้านดนตรี คอมพิวเตอร์ และอิเล็กทรอนิกส์ หน้าเว็บไซต์นี้จะช่วยให้คุณได้รู้จักผมมากขึ้น</p>
+                </div>
+            </section>
+
+            <section id="about" class="page">
+                <div class="page-content">
+                    <h2>เกี่ยวกับฉัน</h2>
+                    <p><strong>ชื่อ:</strong> จักรพงศ์ เตชทัต</p>
+                    <p><strong>ชื่อเล่น:</strong> ไมค์</p>
+                    <p><strong>อายุ:</strong> 17 ปี</p>
+                    <p>ผมเป็นคนที่มีความกระตือรือร้นในการเรียนรู้สิ่งใหม่ๆ โดยเฉพาะในสาขาที่เกี่ยวข้องกับเทคโนโลยีและศิลปะ</p>
+                </div>
+            </section>
+
+            <section id="interests" class="page">
+                <div class="page-content">
+                    <h2>ความสนใจ</h2>
+                    <p>ผมมีความสนใจในหลายๆ ด้าน ซึ่งมีผลต่อการพัฒนาตัวเองในหลายๆ มิติ:</p>
+                    <ul>
+                        <li><strong>ดนตรี:</strong> เป็นความหลงใหลหลักของผม โดยเฉพาะดนตรีแนวร็อคและเมทัล</li>
+                        <li><strong>คอมพิวเตอร์:</strong> ผมชอบการเรียนรู้เกี่ยวกับระบบคอมพิวเตอร์ การเขียนโปรแกรม และการแก้ไขปัญหาต่างๆ</li>
+                        <li><strong>อิเล็กทรอนิกส์:</strong> สนุกกับการประกอบวงจรและทำความเข้าใจหลักการทำงานของอุปกรณ์อิเล็กทรอนิกส์</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="education" class="page">
+                <div class="page-content">
+                    <h2>การศึกษา</h2>
+                    <p>ปัจจุบันผมกำลังศึกษาอยู่ที่:</p>
+                    <p><strong>โรงเรียนสุรธรรมพิทักษ์</strong></p>
+                    <p>เป็นสถานที่ที่เปิดโอกาสให้ผมได้เรียนรู้และพัฒนาทักษะต่างๆ ทั้งด้านวิชาการและกิจกรรมเสริม</p>
+                </div>
+            </section>
+
+            <section id="hobbies" class="page">
+                <div class="page-content">
+                    <h2>งานอดิเรก</h2>
+                    <p>ในเวลาว่าง ผมมักจะใช้เวลาไปกับงานอดิเรกที่ผมรัก:</p>
+                    <ul>
+                        <li><strong>เล่นดนตรีเบสไฟฟ้า:</strong> เป็นกิจกรรมที่ช่วยผ่อนคลายและฝึกสมาธิไปในตัว ผมชอบการสร้างสรรค์ไลน์เบสใหม่ๆ และเล่นเพลงที่ชอบกับเพื่อนๆ</li>
+                    </ul>
+                    <p>นอกจากนี้ยังชอบฟังเพลงแนวต่างๆ และดูหนังอีกด้วย</p>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script>
-        // โค้ด JavaScript ทั้งหมดจะถูกใส่ไว้ในส่วนนี้
         document.addEventListener('DOMContentLoaded', () => {
-            // Add active class to current nav link
-            const currentPath = window.location.pathname.split('/').pop();
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const pages = document.querySelectorAll('.page');
+
             navLinks.forEach(link => {
-                const linkPath = link.getAttribute('href').split('/').pop();
-                if (linkPath === currentPath) {
-                    link.classList.add('active');
-                }
-            });
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    const targetPageId = e.target.getAttribute('href').substring(1);
 
-            // Animate text elements
-            const animateTexts = document.querySelectorAll('.animate-text');
-            
-            // Using Intersection Observer to trigger animation when in view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
+                    // Deactivate all links and pages
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+
+                    // Activate the clicked link and its corresponding page
+                    e.target.classList.add('active');
+                    document.getElementById(targetPageId).classList.add('active');
                 });
-            }, {
-                threshold: 0.1
-            });
-
-            animateTexts.forEach(text => {
-                observer.observe(text);
             });
         });
     </script>
+
 </body>
 </html>
